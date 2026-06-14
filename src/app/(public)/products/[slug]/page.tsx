@@ -13,7 +13,8 @@ interface Props { params: { slug: string } }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { data: cat } = await supabase.from('categories').select('name, description').eq('slug', params.slug).single()
   if (!cat) return { title: 'Category Not Found' }
-  return { title: cat.name, description: cat.description ?? undefined }
+  const catData = cat as { name: string; description: string | null }
+  return { title: catData.name, description: catData.description ?? undefined }
 }
 
 export default async function CategoryPage({ params }: Props) {
