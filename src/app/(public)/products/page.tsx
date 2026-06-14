@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { supabase } from '@/lib/supabase'
+import { supabaseAdmin } from '@/lib/supabase'
 import type { Metadata } from 'next'
 
 export const dynamic = 'force-dynamic'
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 export default async function ProductsPage() {
-  const { data: productsRaw } = await supabase
+  const { data: productsRaw } = await supabaseAdmin
     .from('products')
     .select('*')
     .eq('is_active', true)
