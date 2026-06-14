@@ -12,12 +12,13 @@ export const metadata: Metadata = {
 }
 
 export default async function ProductsPage() {
-  const { data: productsRaw } = await supabaseAdmin
+  const { data: productsRaw, error } = await supabaseAdmin
     .from('products')
     .select('*')
     .eq('is_active', true)
     .order('created_at', { ascending: false })
 
+  console.log('PRODUCTS DEBUG:', { count: productsRaw?.length, error: error?.message })
   const products = (productsRaw as any[]) || []
 
   return (
