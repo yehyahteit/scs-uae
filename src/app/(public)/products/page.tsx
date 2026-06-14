@@ -40,7 +40,7 @@ export default async function ProductsPage() {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
               {products.map((product: any) => (
-                <div key={product.id} className="card group flex flex-col h-full">
+                <Link href={`/products/item/${product.id}`} key={product.id} className="card group flex flex-col h-full hover:shadow-lg transition-shadow duration-200">
                   <div className="relative h-60 overflow-hidden shrink-0">
                     {product.images?.[0] ? (
                       <Image
@@ -63,11 +63,11 @@ export default async function ProductsPage() {
                     {product.description && (
                       <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 flex-1">{product.description}</p>
                     )}
-                    <Link href="/contact#quote" className="mt-4 inline-flex items-center text-primary font-semibold text-sm hover:text-primary-dark">
-                      Request a Quote →
-                    </Link>
+                    <span className="mt-4 inline-flex items-center text-primary font-semibold text-sm hover:text-primary-dark">
+                      View Product →
+                    </span>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           )}
