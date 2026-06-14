@@ -37,19 +37,19 @@ export default async function CategoryPage({ params }: Props) {
   if (!categoryRaw) notFound()
   const category = categoryRaw as unknown as Category
 
-  const { data: products } = await supabase
+  const { data: productsRaw } = await supabase
     .from('products')
     .select('*')
     .eq('category_id', category.id)
     .eq('is_active', true)
     .order('sort_order')
 
+  const products = (productsRaw as unknown as { id: string; name: string; images: string[] }[]) || []
+
   const allImages: { url: string; productName: string }[] = []
-  if (products) {
-    for (const product of products) {
-      for (const img of product.images || []) {
-        allImages.push({ url: img, productName: product.name })
-      }
+  for (const product of products) {
+    for (const img of product.images || []) {
+      allImages.push({ url: img, productName: product.name })
     }
   }
 
