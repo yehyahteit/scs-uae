@@ -11,12 +11,21 @@ export const metadata: Metadata = {
   description: 'Browse our full range of uniform products for restaurants, hotels, medical, corporate, schools, spa, industrial, and more.',
 }
 
+interface Category {
+  id: string
+  name: string
+  slug: string
+  description: string | null
+  image_url: string | null
+}
+
 export default async function ProductsPage() {
-  const { data: categories } = await supabase
+  const { data: categoriesRaw } = await supabase
     .from('categories')
     .select('*')
     .eq('is_active', true)
     .order('sort_order')
+  const categories = (categoriesRaw as unknown as Category[]) || []
 
   return (
     <>
