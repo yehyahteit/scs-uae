@@ -17,15 +17,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: catData.name, description: catData.description ?? undefined }
 }
 
+interface Category {
+  id: string
+  name: string
+  slug: string
+  description: string | null
+  image_url: string | null
+  is_active: boolean
+}
+
 export default async function CategoryPage({ params }: Props) {
-  const { data: category } = await supabase
+  const { data: categoryRaw } = await supabase
     .from('categories')
     .select('*')
     .eq('slug', params.slug)
     .eq('is_active', true)
     .single()
 
-  if (!category) notFound()
+  if (!categoryRaw) notFound()
+  const category = categoryRaw as unknown as Category
 
   const { data: products } = await supabase
     .from('products')
