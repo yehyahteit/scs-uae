@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { supabaseAdmin } from '@/lib/supabase'
+import { createClient } from '@supabase/supabase-js'
 import type { Metadata } from 'next'
 
 export const dynamic = 'force-dynamic'
@@ -12,13 +12,16 @@ export const metadata: Metadata = {
 }
 
 export default async function ProductsPage() {
-  const { data: productsRaw, error } = await supabaseAdmin
+  const client = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
+  const { data: productsRaw, error } = await client
     .from('products')
-    .select('*')
-    .eq('is_active', true)
+    .select('id, name, description, images, is_featured, is_active')
     .order('created_at', { ascending: false })
 
-  console.log('PRODUCTS DEBUG:', { count: productsRaw?.length, error: error?.message })
+  console.log('PRODUCTS DEBUG:', { count: productsRaw?.length, error: error?.message, url: process.env.NEXT_PUBLIC_SUPABASE_URL })
   const products = (productsRaw as any[]) || []
 
   return (
