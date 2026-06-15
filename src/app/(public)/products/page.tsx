@@ -18,7 +18,7 @@ export default async function ProductsPage() {
   )
   const { data: productsRaw, error } = await client
     .from('products')
-    .select('id, name, description, images, is_featured, is_active')
+    .select('id, name, slug, description, images, is_featured, is_active')
     .order('created_at', { ascending: false })
 
   console.log('PRODUCTS DEBUG:', { count: productsRaw?.length, error: error?.message, url: process.env.NEXT_PUBLIC_SUPABASE_URL })
@@ -40,7 +40,7 @@ export default async function ProductsPage() {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
               {products.map((product: any) => (
-                <Link href={`/products/item/${product.id}`} key={product.id} className="card group flex flex-col h-full hover:shadow-lg transition-shadow duration-200">
+                <Link href={`/products/${product.slug || product.id}`} key={product.id} className="card group flex flex-col h-full hover:shadow-lg transition-shadow duration-200">
                   <div className="relative h-60 overflow-hidden shrink-0">
                     {product.images?.[0] ? (
                       <Image
