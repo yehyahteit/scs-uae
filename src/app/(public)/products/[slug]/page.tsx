@@ -56,7 +56,7 @@ export default async function ProductPage({ params }: Props) {
       </div>
 
       {/* Hero */}
-      <section className="relative bg-primary text-white py-16 overflow-hidden">
+      <section className="relative bg-primary text-white py-8 overflow-hidden">
         {images[0] && (
           <Image src={images[0]} alt={product.name} fill sizes="100vw" className="object-cover opacity-20" />
         )}
@@ -73,8 +73,8 @@ export default async function ProductPage({ params }: Props) {
 
       {/* Gallery */}
       {galleryImages.length > 0 && (
-        <section className="py-16 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-4 bg-gray-50">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <ProductGallery images={galleryImages} />
           </div>
         </section>
