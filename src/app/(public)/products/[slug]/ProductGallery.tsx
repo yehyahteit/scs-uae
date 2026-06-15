@@ -47,19 +47,17 @@ export default function ProductGallery({ images }: Props) {
     <div className="flex flex-col items-center gap-6 select-none">
 
       {/* Book viewer */}
-      <div className="relative w-full max-w-4xl">
+      <div className="relative w-full max-w-lg">
 
         {/* Book shadow + border */}
         <div
-          className="relative mx-auto rounded-2xl overflow-hidden bg-gray-900"
+          className="relative mx-auto rounded-2xl overflow-hidden bg-white"
           style={{
-            boxShadow: '0 30px 80px rgba(0,0,0,0.45), 0 8px 24px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(255,255,255,0.05)',
-            aspectRatio: '4/3',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.15), 0 4px 16px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(0,0,0,0.06)',
+            aspectRatio: '3/4',
+            maxHeight: '80vh',
           }}
         >
-          {/* Spine line in center */}
-          <div className="absolute inset-y-0 left-1/2 w-px bg-black/40 z-10 pointer-events-none" />
-
           {/* Page flip animation wrapper */}
           <div
             className="w-full h-full transition-all duration-300"
@@ -78,7 +76,7 @@ export default function ProductGallery({ images }: Props) {
               src={img.url}
               alt={img.productName}
               fill
-              sizes="(max-width: 768px) 100vw, 896px"
+              sizes="(max-width: 768px) 100vw, 600px"
               className="object-contain"
               priority
             />
@@ -126,7 +124,7 @@ export default function ProductGallery({ images }: Props) {
       </div>
 
       {/* Progress bar */}
-      <div className="w-full max-w-4xl h-1 bg-gray-200 rounded-full overflow-hidden">
+      <div className="w-full max-w-lg h-1 bg-gray-200 rounded-full overflow-hidden">
         <div
           className="h-full bg-primary rounded-full transition-all duration-300"
           style={{ width: `${progress}%` }}
@@ -134,7 +132,7 @@ export default function ProductGallery({ images }: Props) {
       </div>
 
       {/* Thumbnail strip */}
-      <div className="w-full max-w-4xl">
+      <div className="w-full max-w-lg">
         <div className="flex items-center gap-2">
           <button
             onClick={() => setThumbStart(s => Math.max(0, s - 1))}
