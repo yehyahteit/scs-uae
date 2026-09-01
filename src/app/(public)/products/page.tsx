@@ -79,7 +79,7 @@ export default async function ProductsPage() {
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="text-3xl font-bold mb-4">Can&rsquo;t find what you need?</h2>
           <p className="text-gray-300 mb-6">We offer custom designs — contact us to discuss your requirements.</p>
-          <Link href="/contact#quote" className="btn-accent">Request a Custom Quote</Link>
+          <a href="https://api.whatsapp.com/send?phone=971555953901&text=Hello%20SCS%20UAE%2C%20I%20would%20like%20to%20request%20a%20quote." target="_blank" rel="noopener noreferrer" className="btn-accent">Request a Custom Quote</a>
         </div>
       </section>
     </>

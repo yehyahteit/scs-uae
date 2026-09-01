@@ -104,9 +104,14 @@ export default function ProductDetailPage() {
               )}
 
               <div className="mt-auto space-y-3">
-                <Link href="/contact#quote" className="btn-primary w-full justify-center text-center block">
+                <a
+                  href="https://api.whatsapp.com/send?phone=971555953901&text=Hello%20SCS%20UAE%2C%20I%20would%20like%20to%20request%20a%20quote."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary w-full justify-center text-center block"
+                >
                   Request a Quote
-                </Link>
+                </a>
                 <Link href="/contact" className="btn-secondary w-full justify-center text-center block">
                   Contact Us
                 </Link>
@@ -125,7 +130,7 @@ export default function ProductDetailPage() {
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="text-3xl font-bold mb-4">Ready to order?</h2>
           <p className="text-gray-300 mb-6">Get a free quote for custom uniforms tailored to your needs.</p>
-          <Link href="/contact#quote" className="btn-accent">Get a Free Quote</Link>
+          <a href="https://api.whatsapp.com/send?phone=971555953901&text=Hello%20SCS%20UAE%2C%20I%20would%20like%20to%20request%20a%20quote." target="_blank" rel="noopener noreferrer" className="btn-accent">Get a Free Quote</a>
         </div>
       </section>
     </>

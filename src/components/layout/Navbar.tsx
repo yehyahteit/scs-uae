@@ -100,9 +100,14 @@ export default function Navbar() {
                 </Link>
               )
             )}
-            <Link href="/contact#quote" className="ml-2 btn-primary text-sm py-2 px-4">
+            <a
+              href="https://api.whatsapp.com/send?phone=971555953901&text=Hello%20SCS%20UAE%2C%20I%20would%20like%20to%20request%20a%20quote."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-2 btn-primary text-sm py-2 px-4"
+            >
               Get a Quote
-            </Link>
+            </a>
           </div>
 
           {/* Mobile toggle */}
@@ -143,13 +148,15 @@ export default function Navbar() {
                 )}
               </div>
             ))}
-            <Link
-              href="/contact#quote"
+            <a
+              href="https://api.whatsapp.com/send?phone=971555953901&text=Hello%20SCS%20UAE%2C%20I%20would%20like%20to%20request%20a%20quote."
+              target="_blank"
+              rel="noopener noreferrer"
               className="block mx-4 mt-3 btn-primary text-center"
               onClick={() => setIsOpen(false)}
             >
               Get a Quote
-            </Link>
+            </a>
           </div>
         )}
       </nav>

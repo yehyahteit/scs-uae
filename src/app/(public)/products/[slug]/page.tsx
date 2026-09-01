@@ -84,7 +84,7 @@ export default async function ProductPage({ params }: Props) {
       <section className="py-12 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <Link href="/products" className="text-primary font-semibold hover:underline">← Back to All Products</Link>
-          <Link href="/contact#quote" className="btn-accent">Get a Free Quote</Link>
+          <a href="https://api.whatsapp.com/send?phone=971555953901&text=Hello%20SCS%20UAE%2C%20I%20would%20like%20to%20request%20a%20quote." target="_blank" rel="noopener noreferrer" className="btn-accent">Get a Free Quote</a>
         </div>
       </section>
     </>

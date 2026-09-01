@@ -143,9 +143,9 @@ function HeroCarousel() {
                 {slide.cta}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link href="/contact#quote" className="flex items-center gap-2 bg-white/15 backdrop-blur-sm hover:bg-white/25 text-white font-bold px-8 py-4 rounded-xl border border-white/30 transition-all duration-300 hover:scale-105">
+              <a href="https://api.whatsapp.com/send?phone=971555953901&text=Hello%20SCS%20UAE%2C%20I%20would%20like%20to%20request%20a%20quote." target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-white/15 backdrop-blur-sm hover:bg-white/25 text-white font-bold px-8 py-4 rounded-xl border border-white/30 transition-all duration-300 hover:scale-105">
                 Get a Free Quote
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -509,10 +509,6 @@ function CTASection() {
             Contact us today for a free quote. We deliver quality uniforms for any industry, any size order, anywhere in the UAE.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/contact#quote"
-              className="bg-white text-primary font-bold px-10 py-4 rounded-xl hover:bg-gray-100 transition-all hover:scale-105 shadow-lg">
-              Request a Free Quote
-            </Link>
             <a href="https://api.whatsapp.com/send?phone=971555953901&text=Hello%20SCS%20UAE"
               target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-2 bg-[#25D366] text-white font-bold px-10 py-4 rounded-xl hover:bg-green-600 transition-all hover:scale-105 shadow-lg">

@@ -88,9 +88,9 @@ export default function ServicesPage() {
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="text-3xl font-bold mb-4">Start Your Order Today</h2>
           <p className="text-white/80 mb-6">Contact us and our team will guide you through every step.</p>
-          <Link href="/contact#quote" className="bg-white text-accent font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors inline-block">
+          <a href="https://api.whatsapp.com/send?phone=971555953901&text=Hello%20SCS%20UAE%2C%20I%20would%20like%20to%20request%20a%20quote." target="_blank" rel="noopener noreferrer" className="bg-white text-accent font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors inline-block">
             Request a Quote
-          </Link>
+          </a>
         </div>
       </section>
     </>

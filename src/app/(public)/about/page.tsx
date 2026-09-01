@@ -153,9 +153,9 @@ export default function AboutPage() {
             Contact us today for a free consultation and custom quote.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/contact#quote" className="bg-white text-primary font-bold px-8 py-3 rounded-xl hover:bg-gray-100 transition-colors">
+            <a href="https://api.whatsapp.com/send?phone=971555953901&text=Hello%20SCS%20UAE%2C%20I%20would%20like%20to%20request%20a%20quote." target="_blank" rel="noopener noreferrer" className="bg-white text-primary font-bold px-8 py-3 rounded-xl hover:bg-gray-100 transition-colors">
               Get a Free Quote
-            </Link>
+            </a>
             <Link href="/products" className="border border-white/30 text-white font-semibold px-8 py-3 rounded-xl hover:bg-white/10 transition-colors">
               Browse Products
             </Link>

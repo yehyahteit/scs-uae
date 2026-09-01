@@ -98,10 +98,11 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
-            <Link href="/contact#quote"
+            <a href="https://api.whatsapp.com/send?phone=971555953901&text=Hello%20SCS%20UAE%2C%20I%20would%20like%20to%20request%20a%20quote."
+              target="_blank" rel="noopener noreferrer"
               className="mt-5 inline-block bg-white text-[#1a1f5e] font-bold text-sm py-2.5 px-5 rounded-lg hover:bg-gray-100 transition-colors">
               Get a Quote
-            </Link>
+            </a>
           </div>
         </div>
       </div>
