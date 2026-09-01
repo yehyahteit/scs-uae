@@ -7,7 +7,7 @@ import { supabaseBrowser } from '@/lib/supabase-browser'
 import { cn } from '@/lib/utils'
 import {
   LayoutDashboard, Package, Users, MessageSquare, Star,
-  Settings, Image, LogOut, ChevronRight, UserCircle, BarChart2, ThumbsUp
+  Settings, Image, LogOut, ChevronRight, UserCircle, BarChart2, ThumbsUp, ShieldCheck
 } from 'lucide-react'
 
 const navItems = [
@@ -20,6 +20,7 @@ const navItems = [
   { href: '/admin/gallery', label: 'Gallery', icon: Image },
   { href: '/admin/stats', label: 'Stats Bar', icon: BarChart2 },
   { href: '/admin/why-us', label: 'Why Choose Us', icon: ThumbsUp },
+  { href: '/admin/users', label: 'Admin Users', icon: ShieldCheck },
   { href: '/admin/settings', label: 'Settings', icon: Settings },
 ]
 

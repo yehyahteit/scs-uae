@@ -12,9 +12,13 @@ export async function middleware(req: NextRequest) {
 
   const isAdminPath = req.nextUrl.pathname.startsWith('/admin')
   const isLoginPath = req.nextUrl.pathname === '/admin/login'
+  // Invite links land here before a session cookie exists yet — the page
+  // itself establishes the session client-side from the email link, so it
+  // must be reachable without an existing session.
+  const isAcceptInvitePath = req.nextUrl.pathname === '/admin/accept-invite'
 
-  // Redirect unauthenticated users away from admin (except login page)
-  if (isAdminPath && !isLoginPath && !session) {
+  // Redirect unauthenticated users away from admin (except login/accept-invite)
+  if (isAdminPath && !isLoginPath && !isAcceptInvitePath && !session) {
     const loginUrl = new URL('/admin/login', req.url)
     return NextResponse.redirect(loginUrl)
   }
