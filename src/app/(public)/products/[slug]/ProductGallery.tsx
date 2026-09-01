@@ -197,6 +197,16 @@ export default function ProductGallery({ images }: Props) {
             onTouchMove={onTouchMove}
             onTouchEnd={onTouchEnd}
           >
+            {/* Preload neighboring pages (hidden) so flips don't wait on
+                Next.js's on-demand image resize the first time you visit them */}
+            <div className="absolute inset-0 opacity-0 pointer-events-none -z-10" aria-hidden="true">
+              {[page - 1, page + 1, page + 2]
+                .filter((i) => i >= 0 && i < total && i !== page)
+                .map((i) => (
+                  <Image key={i} src={images[i].url} alt="" fill sizes="800px" className="object-cover" loading="eager" />
+                ))}
+            </div>
+
             {/* Underneath / incoming page (shown during flip) */}
             {nextImg && (
               <div className="absolute inset-0">
