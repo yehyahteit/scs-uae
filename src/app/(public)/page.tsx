@@ -7,9 +7,9 @@ import { CheckCircle, Star, ArrowRight, ChevronLeft, ChevronRight, ArrowDown, Ph
 import { supabaseBrowser } from '@/lib/supabase-browser'
 
 // ── DATA ─────────────────────────────────────────────────────────
+// Slide text only. Background images come from Admin → Gallery (section = "hero").
 const heroSlides = [
   {
-    image: 'https://static.wixstatic.com/media/bf2fa2_c2bbf84b937d4f04be53381926ed90a0~mv2.jpeg',
     title: 'Smart Corporate',
     highlight: 'Solutions',
     subtitle: 'Premium uniform supplier for all industries in the UAE since 2012',
@@ -17,7 +17,6 @@ const heroSlides = [
     href: '/products',
   },
   {
-    image: 'https://static.wixstatic.com/media/bf2fa2_5e5ca697bd6549b7b627dd3724857939~mv2.jpeg',
     title: 'Hotel & Restaurant',
     highlight: 'Uniforms',
     subtitle: 'Elegant workwear that represents your brand perfectly',
@@ -25,7 +24,6 @@ const heroSlides = [
     href: '/products/restaurant',
   },
   {
-    image: 'https://static.wixstatic.com/media/bf2fa2_d6b7ceab6fcb422b9d6154a639bc4f49~mv2.jpeg',
     title: 'Medical &',
     highlight: 'Healthcare',
     subtitle: 'Professional medical uniforms crafted for comfort and functionality',
@@ -33,7 +31,6 @@ const heroSlides = [
     href: '/products/medical',
   },
   {
-    image: 'https://static.wixstatic.com/media/bf2fa2_54cf1fcd1e6f48d685021eab3fe9ee1a~mv2.jpeg',
     title: 'Corporate',
     highlight: 'Workwear',
     subtitle: 'Tailored corporate uniforms that make a lasting impression',
@@ -41,7 +38,6 @@ const heroSlides = [
     href: '/products/corporate',
   },
   {
-    image: 'https://static.wixstatic.com/media/bf2fa2_ea3e8a6af56b4d3e89a87fd4490d9ecc~mv2.jpeg',
     title: 'Industrial &',
     highlight: 'Safety Gear',
     subtitle: 'High-visibility and safety-certified workwear for every environment',
@@ -92,12 +88,30 @@ function HeroCarousel() {
   const [current, setCurrent] = useState(0)
   const [animating, setAnimating] = useState(false)
   const animatingRef = useRef(false)
+  const [heroImages, setHeroImages] = useState<{ url: string; alt_text: string | null }[]>([])
+
+  // One slide per gallery image (text cycles through heroSlides).
+  // With no images, the text slides show on the brand background.
+  const slideCount = heroImages.length > 0 ? heroImages.length : heroSlides.length
+  const countRef = useRef(slideCount)
+  countRef.current = slideCount
+
+  useEffect(() => {
+    supabaseBrowser()
+      .from('gallery_images')
+      .select('url, alt_text')
+      .eq('section', 'hero')
+      .eq('is_active', true)
+      .order('sort_order')
+      .then(({ data }) => { setHeroImages(data || []); setCurrent(0) })
+  }, [])
 
   const go = (dir: 'next' | 'prev') => {
     if (animatingRef.current) return
     animatingRef.current = true
     setAnimating(true)
-    setCurrent(c => dir === 'next' ? (c + 1) % heroSlides.length : (c - 1 + heroSlides.length) % heroSlides.length)
+    const n = countRef.current
+    setCurrent(c => dir === 'next' ? (c + 1) % n : (c - 1 + n) % n)
     setTimeout(() => { animatingRef.current = false; setAnimating(false) }, 700)
   }
 
@@ -106,17 +120,17 @@ function HeroCarousel() {
     return () => clearInterval(t)
   }, []) // runs once — go() uses ref so no stale closure
 
-  const slide = heroSlides[current]
+  const slide = heroSlides[current % heroSlides.length]
 
   return (
-    <section className="relative h-screen min-h-[600px] max-h-[900px] overflow-hidden">
-      {/* Background images */}
-      {heroSlides.map((s, i) => (
+    <section className="relative h-screen min-h-[600px] max-h-[900px] overflow-hidden bg-primary">
+      {/* Background images (from Admin → Gallery, section "hero") */}
+      {heroImages.map((img, i) => (
         <div
-          key={i}
+          key={img.url + i}
           className={`absolute inset-0 transition-opacity duration-700 ${i === current ? 'opacity-100' : 'opacity-0'}`}
         >
-          <Image src={s.image} alt={s.title} fill className="object-cover" priority={i === 0} />
+          <Image src={img.url} alt={img.alt_text || ''} fill className="object-cover" priority={i === 0} />
           <div className="absolute inset-0 bg-black/55" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent" />
         </div>
@@ -161,9 +175,9 @@ function HeroCarousel() {
 
       {/* Dots */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
-        {heroSlides.map((_, i) => (
+        {Array.from({ length: slideCount }).map((_, i) => (
           <button key={i} onClick={() => setCurrent(i)}
-            className={`rounded-full transition-all duration-300 ${i === current ? 'w-8 h-3 bg-primary' : 'w-3 h-3 bg-white/50 hover:bg-white'}`} />
+            className={`rounded-full transition-all duration-300 ${i === current ? 'w-8 h-3 bg-white' : 'w-3 h-3 bg-white/50 hover:bg-white'}`} />
         ))}
       </div>
 
