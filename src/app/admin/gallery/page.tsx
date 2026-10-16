@@ -78,9 +78,14 @@ export default function AdminGalleryPage() {
                   <label className="label">Section</label>
                   <select className="input-field" value={form.section} onChange={e => setForm({...form, section: e.target.value})}>
                     <option value="hero">Hero / Slideshow</option>
+                    <option value="marquee">Home Page Scrolling Strip</option>
                     <option value="about">About Page</option>
                     <option value="services">Services Page</option>
                   </select>
+                </div>
+                <div>
+                  <label className="label">Sort Order</label>
+                  <input type="number" className="input-field" value={form.sort_order} onChange={e => setForm({...form, sort_order: Number(e.target.value) || 0})} />
                 </div>
               </div>
               <div className="flex gap-3 mt-6">

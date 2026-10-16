@@ -131,7 +131,7 @@ create table if not exists gallery_images (
   id          uuid primary key default uuid_generate_v4(),
   url         text not null,
   alt_text    text,
-  section     text default 'hero',  -- 'hero' | 'about' | 'services'
+  section     text default 'hero',  -- 'hero' | 'marquee' | 'about' | 'services'
   sort_order  int default 0,
   is_active   boolean default true,
   created_at  timestamptz default now()

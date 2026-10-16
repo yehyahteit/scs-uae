@@ -381,24 +381,29 @@ function WhyUs() {
 }
 
 // ── IMAGE MARQUEE ────────────────────────────────────────────────
-const marqueeImages = [
-  'https://static.wixstatic.com/media/bf2fa2_c2bbf84b937d4f04be53381926ed90a0~mv2.jpeg',
-  'https://static.wixstatic.com/media/bf2fa2_5e5ca697bd6549b7b627dd3724857939~mv2.jpeg',
-  'https://static.wixstatic.com/media/bf2fa2_9a3c13cdf5a84a4ea8eb115b441331a3~mv2.jpeg',
-  'https://static.wixstatic.com/media/bf2fa2_d6b7ceab6fcb422b9d6154a639bc4f49~mv2.jpeg',
-  'https://static.wixstatic.com/media/bf2fa2_261cdaa2b8284d5cbc5e626ebe9f459d~mv2.jpeg',
-  'https://static.wixstatic.com/media/bf2fa2_ea3e8a6af56b4d3e89a87fd4490d9ecc~mv2.jpeg',
-  'https://static.wixstatic.com/media/bf2fa2_aaec700f92234f708a028eaf0e42bb18~mv2.jpeg',
-  'https://static.wixstatic.com/media/bf2fa2_0ec2c06a7a964bc1a54a72ebf5e6f468~mv2.jpeg',
-]
-
+// Images are managed in Admin → Gallery (section = "marquee").
+// If there are no active marquee images, the section is hidden.
 function ImageMarquee() {
+  const [images, setImages] = useState<{ url: string; alt_text: string | null }[]>([])
+
+  useEffect(() => {
+    supabaseBrowser()
+      .from('gallery_images')
+      .select('url, alt_text')
+      .eq('section', 'marquee')
+      .eq('is_active', true)
+      .order('sort_order')
+      .then(({ data }) => setImages(data || []))
+  }, [])
+
+  if (images.length === 0) return null
+
   return (
     <section className="py-6 bg-gray-100 overflow-hidden">
       <div className="flex gap-4 animate-marquee whitespace-nowrap">
-        {[...marqueeImages, ...marqueeImages].map((src, i) => (
+        {[...images, ...images].map((img, i) => (
           <div key={i} className="shrink-0 w-56 h-36 rounded-xl overflow-hidden shadow-sm">
-            <Image src={src} alt="" width={224} height={144} className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+            <Image src={img.url} alt={img.alt_text || ''} width={224} height={144} className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
           </div>
         ))}
       </div>
